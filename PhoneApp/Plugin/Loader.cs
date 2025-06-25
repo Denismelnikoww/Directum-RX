@@ -10,45 +10,45 @@ using PhoneApp.Domain.Interfaces;
 
 namespace PhoneApp.Plugin
 {
-  class Loader
-  {
-    private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
-    public static List<IPluggable> Plugins = new List<IPluggable>();
-    public static void LoadPlugins()
+    class Loader
     {
-      logger.Info("Loading plugins");
-      var plugins = Directory.EnumerateFiles(".").Where(p => p.EndsWith(".Plugin.dll"));
-      logger.Info($"Found {plugins.Count()} plugin(s)");
-
-      foreach (var pluginPath in plugins)
-      {
-        logger.Info($"Loading {pluginPath}");
-        Assembly assembly = Assembly.LoadFrom(pluginPath);
-        foreach(var type in assembly.GetTypes())
+        private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+        public static List<IPluggable> Plugins = new List<IPluggable>();
+        public static void LoadPlugins()
         {
-          if (type.GetInterfaces().Any(i => i.IsAssignableFrom(typeof(IPluggable))))
-          {
-            var authors = type.GetCustomAttributes(typeof(Author), false);
+            logger.Info("Loading plugins");
+            var plugins = Directory.EnumerateFiles(".").Where(p => p.EndsWith(".Plugin.dll"));
+            logger.Info($"Found {plugins.Count()} plugin(s)");
 
-            if (authors.Length == 0)
+            foreach (var pluginPath in plugins)
             {
-              throw new Exception("No authors provided. Untrusted plugin!");
+                logger.Info($"Loading {pluginPath}");
+                Assembly assembly = Assembly.LoadFrom(pluginPath);
+                foreach (var type in assembly.GetTypes())
+                {
+                    if (type.GetInterfaces().Any(i => i.IsAssignableFrom(typeof(IPluggable))))
+                    {
+                        var authors = type.GetCustomAttributes(typeof(Author), false);
+
+                        if (authors.Length == 0)
+                        {
+                            throw new Exception("No authors provided. Untrusted plugin!");
+                        }
+
+                        foreach (var author in authors)
+                        {
+                            logger.Info($"Author {author.ToString()}");
+                        }
+
+                        var constructors = type.GetConstructors();
+                        var pluginInstance = constructors.First().Invoke(new object[] { });
+
+                        logger.Info("Plugin loaded and ready");
+
+                        Loader.Plugins.Add((pluginInstance as IPluggable));
+                    }
+                }
             }
-
-            foreach (var author in authors)
-            {
-              logger.Info($"Author {author.ToString()}");
-            }
-
-            var constructors = type.GetConstructors();
-            var pluginInstance = constructors.First().Invoke(new object[] { });
-
-            logger.Info("Plugin loaded and ready");
-
-            Loader.Plugins.Add((pluginInstance as IPluggable));
-          }
         }
-      }
     }
-  }
 }

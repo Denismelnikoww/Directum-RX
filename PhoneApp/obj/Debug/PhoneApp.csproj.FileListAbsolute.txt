@@ -13,3 +13,18 @@ C:\Users\dmitr\source\repos\PhoneApp\obj\Debug\PhoneApp.csproj.CopyComplete
 C:\Users\dmitr\source\repos\PhoneApp\bin\Debug\EmployeesLoader.Plugin.dll
 C:\Users\dmitr\source\repos\PhoneApp\bin\Debug\EmployeesViewer.Plugin.dll
 C:\Users\dmitr\source\repos\PhoneApp\bin\Debug\EmployeesViewer.Plugin.pdb
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\bin\Debug\EmployeesLoader.Plugin.dll
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\bin\Debug\EmployeesViewer.Plugin.dll
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\bin\Debug\EmployeesViewer.Plugin.pdb
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\bin\Debug\PhoneApp.exe.config
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\bin\Debug\PhoneApp.exe
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\bin\Debug\PhoneApp.pdb
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\bin\Debug\Newtonsoft.Json.dll
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\bin\Debug\NLog.dll
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\bin\Debug\Newtonsoft.Json.xml
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\bin\Debug\NLog.xml
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\obj\Debug\PhoneApp.csproj.AssemblyReference.cache
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\obj\Debug\PhoneApp.csproj.CoreCompileInputs.cache
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\obj\Debug\PhoneApp.csproj.Up2Date
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\obj\Debug\PhoneApp.exe
+D:\Download\тестовое задание\PhonePluginsApplication\PhoneApp\obj\Debug\PhoneApp.pdb
