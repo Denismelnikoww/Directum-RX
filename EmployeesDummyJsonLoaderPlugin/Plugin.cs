@@ -23,13 +23,42 @@ namespace EmployeesLoaderPlugin
             logger.Info("Loading employees from {URl}", URL);
 
             var employees = args.OfType<EmployeesDTO>().ToList();
-            
+
             var startCount = employees.Count();
 
             using (var httpClient = new HttpClient())
             {
-                var jsonString = Task.Run(() => httpClient.GetStringAsync(URL)).Result;
-                var response = JsonConvert.DeserializeObject<DummyResponse>(jsonString);
+                string jsonString;
+                try
+                {
+                    jsonString = Task.Run(() => httpClient.GetStringAsync(URL)).Result;
+                }
+                catch (AggregateException ae) when (ae.InnerException is HttpRequestException)
+                {
+                    logger.Error(ae.InnerException, "Network error while fetching data from {URL}", URL);
+                    return args;
+                }
+                catch (TaskCanceledException)
+                {
+                    logger.Error("Request to {URL} timed out", URL);
+                    return args;
+                }
+
+                DummyResponse response;
+                try
+                {
+                    response = JsonConvert.DeserializeObject<DummyResponse>(jsonString);
+                    if (response?.Users == null)
+                    {
+                        logger.Error("Received invalid data from {URL}", URL);
+                        return args;
+                    }
+                }
+                catch (JsonException je)
+                {
+                    logger.Error(je, "Failed to deserialize response from {URL}", URL);
+                    return args;
+                }
 
                 foreach (var dummyEmployee in response.Users)
                 {

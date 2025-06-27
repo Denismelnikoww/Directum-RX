@@ -22,7 +22,7 @@ namespace EmployeesLoaderPlugin
 
             string command = "";
 
-            while (!command.ToLower().Contains("quit"))
+            while (!command.ToLower().Contains("quit") && command.ToLower() != "q")
             {
                 Console.Write("> ");
                 command = Console.ReadLine();
